@@ -8,6 +8,14 @@ class App extends React.Component {
       display: '0'
     }
   }
+
+  digitValue(digit) {
+  
+    this.setState ({
+      display: digit
+    });
+  }
+
     render() {
       return (
         <div>
@@ -15,21 +23,22 @@ class App extends React.Component {
             <h1>Calculator</h1>
             <h3>Elite Level Online Problem Solving</h3>
           </div>
-          <div className='calulator'>
+          <div className='calculator'>
             <div className='display'>
                 <p>{this.state.display}</p>
             </div>
             <div className='numberButtons'>
-              <button className='digit'>1</button>
-              <button className='digit'>2</button>
-              <button className='digit'>3</button>
-              <button className='digit'>4</button>
-              <button className='digit'>5</button>
-              <button className='digit'>6</button>
-              <button className='digit'>7</button>
-              <button className='digit'>8</button>
-              <button className='digit'>9</button>
-              <button className='digit'>0</button>
+              <button className='digit' onClick= {() => this.digitValue(1)}>1</button>
+              <button className='digit' onClick= {() => this.digitValue(2)}>2</button>
+              <button className='digit' onClick= {() => this.digitValue(3)}>3</button>
+              <button className='digit' onClick= {() => this.digitValue(4)}>4</button>
+              <button className='digit' onClick= {() => this.digitValue(5)}>5</button>
+              <button className='digit' onClick= {() => this.digitValue(6)}>6</button>
+              <button className='digit' onClick= {() => this.digitValue(7)}>7</button>
+              <button className='digit' onClick= {() => this.digitValue(8)}>8</button>
+              <button className='digit' onClick= {() => this.digitValue(9)}>9</button>
+              <button className='digit' onClick= {() => this.digitValue(0)}>0</button>
+              <button className='digit decimal'>.</button>
             </div>
             <div className='operatorButtons'>
               <button className='operator'>+</button>
