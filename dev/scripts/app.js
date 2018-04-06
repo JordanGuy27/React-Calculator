@@ -5,15 +5,51 @@ class App extends React.Component {
   constructor() {
     super(); 
     this.state = {
-      display: '0'
+      display: '0',
+      waitingForExecution: false,
+      operator: null
     }
   }
 
-  digitValue(digit) {
-  
+  inputDecimal() {
+    if (this.state.waitingForExecution) {
+      this.setState({
+        display: '.',
+        waitingForExecution: false
+      })
+    } else if (this.state.display.indexOf('.') === -1) {
+      this.setState ({
+        display: this.state.display + '.',
+        waitingForExecution: false
+      })
+    }
+  }
+
+  clearNumbers() {
     this.setState ({
-      display: digit
-    });
+      display: '0'
+    })
+  }
+
+  digitValue(digit) {
+    if (this.state.waitingForExecution) {
+      this.setState({
+        display: String(digit),
+        waitingForExecution: false
+      })
+    } else {
+        this.setState ({
+          display:this.state.display === '0' ? String(digit) : this.state.display + digit,
+          waitingForExecution: false
+        });
+      }
+  }
+
+  executeEquation(operator) {
+    this.setState({
+      waitingForExecution: true,
+      operator: operator
+    })
   }
 
     render() {
@@ -38,15 +74,16 @@ class App extends React.Component {
               <button className='digit' onClick= {() => this.digitValue(8)}>8</button>
               <button className='digit' onClick= {() => this.digitValue(9)}>9</button>
               <button className='digit' onClick= {() => this.digitValue(0)}>0</button>
-              <button className='digit decimal'>.</button>
+              <button className='digit' onClick={() => this.inputDecimal()}>.</button>
             </div>
             <div className='operatorButtons'>
-              <button className='operator'>+</button>
-              <button className='operator'>_</button>
-              <button className='operator'>/</button>
-              <button className='operator'>*</button>
+              <button className='operator' onClick={() => this.executeEquation('+')}>+</button>
+              <button className='operator' onClick={() => this.executeEquation('-')}>-</button>
+              <button className='operator' onClick={() => this.executeEquation('/')}>/</button>
+              <button className='operator' onClick={() => this.executeEquation('*')}>*</button>
               <button className='operator'>EXP</button>
               <button className='operator'>SQ</button>
+              <button className='operator' onClick={() => this.clearNumbers()}>CLEAR</button>
               <button className='operator'>DEL</button>
             </div>
           </div>
