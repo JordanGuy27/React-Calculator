@@ -46,7 +46,7 @@ class App extends React.Component {
       }
   }
 
-  executeEquation(operator) {
+  executeEquation(nextOperator) {
 
     const secondNumber = parseFloat(this.state.display)
 
@@ -62,9 +62,9 @@ class App extends React.Component {
       this.setState ({
         numberTotal: secondNumber
       })
-    } else if (operator) {
+    } else if (this.state.operator) {
       const value = this.state.numberTotal || 0
-      const newValue = operationsPerforming[operator](value, secondNumber)
+      const newValue = operationsPerforming[this.state.operator](value, secondNumber)
 
       this.setState({
         numberTotal: newValue,
@@ -75,7 +75,7 @@ class App extends React.Component {
 
     this.setState({
       waitingForExecution: true,
-      operator: operator
+      operator: nextOperator
     })
   }
 
