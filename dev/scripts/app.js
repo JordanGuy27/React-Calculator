@@ -7,7 +7,8 @@ class App extends React.Component {
     this.state = {
       display: '0',
       waitingForExecution: false,
-      operator: null
+      operator: null,
+      numberTotal: null
     }
   }
 
@@ -46,6 +47,32 @@ class App extends React.Component {
   }
 
   executeEquation(operator) {
+
+    const secondNumber = parseFloat(this.state.display)
+
+    const operationsPerforming = {
+      '+': (firstNumber, secondNumber) => firstNumber + secondNumber,
+      '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
+      '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
+      '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
+      '=': (firstNumber, secondNumber) => secondNumber
+    }
+
+    if (this.state.numberTotal == null) {
+      this.setState ({
+        numberTotal: secondNumber
+      })
+    } else if (operator) {
+      const value = this.state.numberTotal || 0
+      const newValue = operationsPerforming[operator](value, secondNumber)
+
+      this.setState({
+        numberTotal: newValue,
+        display: String(newValue)
+      })
+    }
+
+
     this.setState({
       waitingForExecution: true,
       operator: operator
@@ -81,6 +108,7 @@ class App extends React.Component {
               <button className='operator' onClick={() => this.executeEquation('-')}>-</button>
               <button className='operator' onClick={() => this.executeEquation('/')}>/</button>
               <button className='operator' onClick={() => this.executeEquation('*')}>*</button>
+              <button className="operator" onClick={() => this.executeEquation('=')}>=</button>
               <button className='operator'>EXP</button>
               <button className='operator'>SQ</button>
               <button className='operator' onClick={() => this.clearNumbers()}>CLEAR</button>
