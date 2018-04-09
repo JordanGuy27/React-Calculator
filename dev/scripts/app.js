@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 class App extends React.Component {
   constructor() {
-    super(); 
+    super();
     this.state = {
       display: '0',
       waitingForExecution: false,
@@ -55,7 +55,9 @@ class App extends React.Component {
       '-': (firstNumber, secondNumber) => firstNumber - secondNumber,
       '/': (firstNumber, secondNumber) => firstNumber / secondNumber,
       '*': (firstNumber, secondNumber) => firstNumber * secondNumber,
-      '=': (firstNumber, secondNumber) => secondNumber
+      '=': (firstNumber, secondNumber) => secondNumber,
+      '^': (firstNumber, secondNumber) => firstNumber * firstNumber,
+      '√': (firstNumber, secondNumber) => Math.sqrt(firstNumber)
     }
 
     if (this.state.numberTotal == null) {
@@ -88,6 +90,7 @@ class App extends React.Component {
           </div>
           <div className='calculator'>
             <div className='display'>
+                <p>{this.state.numberTotal}{this.state.operator}</p>
                 <p>{this.state.display}</p>
             </div>
             <div className='numberButtons'>
@@ -109,8 +112,8 @@ class App extends React.Component {
               <button className='operator' onClick={() => this.executeEquation('/')}>/</button>
               <button className='operator' onClick={() => this.executeEquation('*')}>*</button>
               <button className="operator" onClick={() => this.executeEquation('=')}>=</button>
-              <button className='operator'>EXP</button>
-              <button className='operator'>SQ</button>
+              <button className='operator' onClick={() => this.executeEquation('^')}>EXP</button>
+              <button className='operator' onClick={() => this.executeEquation('√')}>SQ</button>
               <button className='operator' onClick={() => this.clearNumbers()}>CLEAR</button>
               <button className='operator'>DEL</button>
             </div>
