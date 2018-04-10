@@ -23,10 +23,12 @@ article,aside,details,figcaption,figure,footer,header,hgroup,nav,section,summary
 }
 
 button {
-    padding: 50px;
+    padding: 20px;
     background-color: #000;
     border-style: none;
+    font-size: 30px;
     color: #fff;
+    width: 100%;
     &:hover {
         background-color: firebrick;
         color: #fff;
@@ -36,6 +38,7 @@ button {
 .calculator {
     text-align: center;
     background-color: #000;
+    margin: 0 auto;
     .display {
         font-size: 20px;
     }
@@ -57,12 +60,12 @@ button {
     width: 100%;
     display: flex;
     .operator {
-        width: 20%;
+        width: 100%;
     }
 }
 
 .equationButtons, .advancedButtons {
     display: flex;
     flex-direction: column;
-    width: 10%;
+    width: 100%;
 }

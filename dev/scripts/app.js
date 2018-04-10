@@ -8,7 +8,8 @@ class App extends React.Component {
       display: '0',
       waitingForExecution: false,
       operator: null,
-      numberTotal: null
+      numberTotal: null,
+      equation: '0'
     }
   }
 
@@ -16,12 +17,14 @@ class App extends React.Component {
     if (this.state.waitingForExecution) {
       this.setState({
         display: '.',
-        waitingForExecution: false
+        waitingForExecution: false,
+        equation: '.'
       })
     } else if (this.state.display.indexOf('.') === -1) {
       this.setState ({
         display: this.state.display + '.',
-        waitingForExecution: false
+        waitingForExecution: false,
+        equation: this.state.display + '.'
       })
     }
   }
@@ -30,7 +33,8 @@ class App extends React.Component {
     this.setState ({
       display: '0',
       numberTotal: null,
-      operator: null
+      operator: null,
+      equation: '0'
     })
   }
 
@@ -38,12 +42,14 @@ class App extends React.Component {
     if (this.state.waitingForExecution) {
       this.setState({
         display: String(digit),
-        waitingForExecution: false
+        waitingForExecution: false,
+        equation: this.state.display + this.state.operator + String(digit)
       })
     } else {
         this.setState ({
           display:this.state.display === '0' ? String(digit) : this.state.display + digit,
-          waitingForExecution: false
+          waitingForExecution: false,
+          equation: this.state.display === '0' ? String(digit) : this.state.display + digit
         });
       }
   }
@@ -91,7 +97,7 @@ class App extends React.Component {
           </div>
           <div className='calculator'>
             <div className='display'>
-                <p>{this.state.numberTotal}{this.state.operator}</p>
+                <p>{this.state.equation}</p>
                 <p>{this.state.display}</p>
             </div>
             <div className='buttonContainer'>
